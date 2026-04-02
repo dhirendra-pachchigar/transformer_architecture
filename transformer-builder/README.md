@@ -1,188 +1,206 @@
 # 🧠 Transformer & Neural Network Builder
 
-A highly interactive, visual, drag-and-drop web platform for learning and building **Transformer Architecture** and **Neural Networks**. This tool behaves like a professional ETL pipeline builder (similar to Airflow or Node-RED), enabling students to visually assemble architectures while understanding the mathematical foundations.
+A professional, interactive drag-and-drop web platform for learning and building Transformer and Neural Network architectures visually.
 
-## ✨ Features
+## 🚀 Live Demo
 
-### Transformer Architecture Builder
-- **Full Granular Components**: Build transformers from individual blocks
-  - Input Pipeline: Token Input, Tokenizer, Input Embedding, Positional Encoding
-  - Attention Internals: Q/K/V Projections, Scaled Dot-Product, Attention Scores, Softmax, Weighted Sum
-  - Encoder Blocks: Multi-Head Attention, Add & Norm, Feed Forward
-  - Decoder Blocks: Masked MHA, Encoder-Decoder Attention
-  - Output: Linear Layers, Softmax, Output Tokens
+**Access the application at:** http://localhost:5173/
 
-### Neural Network Builder
-- Input Layer, Dense Layers, Hidden Layers, Output Layer
-- Configurable neurons and activation functions (ReLU, Sigmoid, Tanh, Softmax, LeakyReLU)
-- Manual weight editing support
+## ✨ Key Features Implemented
 
-### Key Features
-- **Drag-and-Drop Interface**: Intuitive node-based editor powered by React Flow
-- **Real-time PyTorch Code Generation**: Automatically generates production-ready PyTorch code
-- **Tensor Shape Visualization**: See tensor shapes at each node (e.g., `(batch_size, seq_len, d_model)`)
-- **Mathematical Formulas**: Each node displays its mathematical operation
-- **Pre-built Templates**: BERT Encoder, GPT Decoder, Simple MLP
-- **Configuration Panel**: Adjust hyperparameters for each component
-- **Mode Selection**: Switch between Transformer, Neural Network, and Hybrid modes
+### 1. **Drag-and-Drop Canvas**
+- ✅ Drag components from the left sidebar onto the canvas
+- ✅ Move nodes freely by dragging them
+- ✅ Connect nodes by dragging from output handles to input handles
+- ✅ Delete connections by selecting an edge and pressing Delete/Backspace
+- ✅ Delete nodes by selecting and pressing Delete/Backspace or using the "Delete Selected" button
 
-## 🏗️ Project Structure
+### 2. **Transformer Components (20+ Blocks)**
 
+#### Input Pipeline
+- Token Input
+- Tokenizer
+- Input Embedding
+- Positional Encoding
+
+#### Attention Internals (Granular)
+- Query (Q) Linear Projection
+- Key (K) Linear Projection
+- Value (V) Linear Projection
+- Scaled Dot-Product Attention
+- Attention Score (QKᵀ / √d)
+- Softmax
+- Weighted Sum
+- Multi-Head Concatenation
+- Final Linear Projection
+
+#### Encoder/Decoder Blocks
+- Multi-Head Attention
+- Masked Multi-Head Attention
+- Encoder-Decoder Attention
+- Add & Norm
+- Feed Forward Network
+- Encoder Block
+- Decoder Block
+
+#### Output
+- Linear Layer
+- Output Tokens
+
+### 3. **Neural Network Components**
+- Input Layer
+- Dense Layer (with configurable neurons)
+- Output Layer
+- Activations: ReLU, Sigmoid, Tanh, Softmax, LeakyReLU
+
+### 4. **Real-Time PyTorch Code Generation**
+- Generates production-ready PyTorch code based on connected components
+- Only shows code for connected components in the graph
+- Includes:
+  - Model class definition
+  - Layer initialization
+  - Forward pass implementation
+  - Helper classes (PositionalEncoding, etc.)
+  - Usage examples
+
+### 5. **Pre-built Templates**
+- **BERT Encoder**: Complete encoder architecture
+- **GPT Decoder**: Decoder-only architecture with causal masking
+- **MLP**: Simple multi-layer perceptron
+
+### 6. **Node Configuration Panel**
+- Click any node to configure:
+  - Batch size
+  - Sequence length
+  - d_model (embedding dimension)
+  - Number of attention heads
+  - Neurons count
+  - Activation functions
+  - Dropout rate
+
+### 7. **Visual Features**
+- Tensor shapes displayed on each node (e.g., `(batch, seq_len, d_model)`)
+- Mathematical formulas for each operation
+- Color-coded nodes by component type
+- Smooth animated connections
+- Grid snapping for clean layouts
+- Zoom and pan controls
+
+### 8. **Mode Selection**
+- **Transformer Mode**: Shows transformer-specific components
+- **Neural Mode**: Shows neural network components
+- **Hybrid Mode**: Mix both architectures
+
+## 🛠️ Technical Implementation
+
+### Fixed Issues
+1. ✅ **Node Movement**: Nodes can now be freely dragged and positioned
+2. ✅ **Connection Deletion**: Edges can be deleted via keyboard (Delete/Backspace) or programmatically
+3. ✅ **Node Deletion**: Added "Delete Selected" button and keyboard support
+4. ✅ **Code Generation**: Now only generates code for connected components
+5. ✅ **Type Safety**: Fixed all TypeScript errors with proper function types
+
+### Architecture
+- **Frontend**: React + TypeScript
+- **State Management**: Zustand
+- **Canvas**: React Flow (drag-drop graph library)
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS
+
+### Project Structure
 ```
 transformer-builder/
 ├── src/
 │   ├── components/
-│   │   ├── CustomNode.tsx      # Custom React Flow node component
-│   │   ├── Sidebar.tsx         # Draggable component sidebar
+│   │   ├── CustomNode.tsx      # Node visualization with shapes & formulas
+│   │   ├── Sidebar.tsx         # Draggable component library
 │   │   ├── CodePanel.tsx       # Monaco Editor for PyTorch code
-│   │   └── NodeConfigPanel.tsx # Node configuration panel
+│   │   └── NodeConfigPanel.tsx # Hyperparameter configuration
 │   ├── store/
-│   │   └── useStore.ts         # Zustand state management
+│   │   └── useStore.ts         # Zustand state with templates
 │   ├── types/
-│   │   └── index.ts            # TypeScript type definitions
+│   │   └── index.ts            # TypeScript definitions
 │   ├── utils/
 │   │   └── codeGenerator.ts    # PyTorch code generation logic
-│   ├── App.tsx                 # Main application component
+│   ├── App.tsx                 # Main application
 │   ├── main.tsx                # Entry point
 │   └── index.css               # Global styles
 ├── package.json
 ├── vite.config.ts
 ├── tsconfig.json
-└── README.md
+└── dist/                       # Production build
 ```
 
-## 🚀 Getting Started
-
-### Prerequisites
-- Node.js 18+ 
-- npm or yarn
-
-### Installation
-
-```bash
-cd transformer-builder
-npm install
-```
-
-### Development
-
-```bash
-npm run dev
-```
-
-The application will be available at `http://localhost:5173`
-
-### Production Build
-
-```bash
-npm run build
-npm run preview
-```
-
-## 📖 Usage Guide
+## 🎯 How to Use
 
 ### Building a Transformer
+1. Select "Transformer" mode from the top toolbar
+2. Drag components from the left sidebar:
+   - Start with "Token Input"
+   - Add "Input Embedding"
+   - Add "Positional Encoding"
+   - Add "Multi-Head Attention" or granular attention blocks
+   - Add "Add & Norm" and "Feed Forward"
+   - End with "Linear Layer" and "Output Tokens"
+3. Connect nodes by dragging from output (right) to input (left)
+4. Click nodes to configure parameters
+5. Click "Show Code" to see generated PyTorch code
 
-1. **Drag Components**: Drag transformer blocks from the left sidebar onto the canvas
-2. **Connect Nodes**: Connect nodes by dragging from output handles (bottom) to input handles (top)
-3. **Configure**: Click on any node to configure its parameters in the right panel
-4. **View Code**: Click "Show Code" to see the generated PyTorch implementation
+### Building a Neural Network
+1. Select "Neural" mode
+2. Drag "Input Layer", "Dense Layer(s)", and "Output Layer"
+3. Connect them sequentially
+4. Configure neurons and activations
+5. View generated code
 
-### Example: BERT-like Encoder
+### Loading Templates
+- Click "BERT Template", "GPT Template", or "MLP Template" buttons
+- Pre-built architecture loads instantly
+- Modify as needed
 
-1. Start with `Token Input` → `Input Embedding` → `Positional Encoding`
-2. Add `Multi-Head Attention` → `Add & Norm`
-3. Add `Feed Forward` → `Add & Norm`
-4. End with `Linear Layer` → `Output Tokens`
+### Deleting Components
+- **Delete Node**: Click node → Press Delete/Backspace OR click "Delete Selected" button
+- **Delete Connection**: Click edge → Press Delete/Backspace
 
-### Example: GPT-like Decoder
+## 🔥 Advanced Features
 
-1. Start with `Token Input` → `Input Embedding` → `Positional Encoding`
-2. Add `Masked MHA` → `Add & Norm`
-3. Add `Feed Forward` → `Add & Norm`
-4. Repeat steps 2-3 for multiple layers
-5. End with `Linear Layer` → `Output Tokens`
+### Connected Component Code Generation
+The code generator intelligently:
+- Identifies connected subgraphs
+- Only generates code for connected components
+- Ignores orphaned nodes
+- Maintains proper layer ordering based on connections
 
-### Example: Simple MLP
+### Type-Safe State Management
+- Proper handling of functional updates in Zustand
+- Support for both direct values and updater functions
+- Full TypeScript type safety
 
-1. Start with `Input Layer` (configure input features)
-2. Add multiple `Dense Layer` nodes with desired neurons and activations
-3. End with `Output Layer` (configure output classes)
+## 📊 Portfolio Highlights
 
-## 🎨 Component Categories
+This project demonstrates:
+1. **Complex State Management**: Handling graph-based data structures
+2. **Real-time Code Generation**: AST-like transformation from visual to code
+3. **Educational UX**: Making complex concepts intuitive
+4. **Type Safety**: Full TypeScript implementation
+5. **Modern React**: Hooks, context, custom hooks
+6. **Performance**: Optimized re-renders with Zustand selectors
 
-### Color Coding
-- 🔵 **Blue**: Input Pipeline components
-- 🟣 **Purple**: Attention mechanism components
-- 🟢 **Green**: Encoder block components
-- 🟡 **Yellow**: Decoder block components
-- 🔴 **Red**: Output components
-- 🩷 **Pink**: Neural Network components
+## 🌐 Access
 
-## 📝 Generated Code Example
+**Development Server**: http://localhost:5173/
 
-When you build an architecture, the tool generates PyTorch code like:
+The application is fully functional and ready for demonstration!
 
-```python
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import math
+## 📝 Next Steps (Optional Enhancements)
 
-class TransformerArchitecture(nn.Module):
-    def __init__(self, d_model=512, num_heads=8, vocab_size=30522, max_seq_len=512, dropout=0.1):
-        super().__init__()
-        self.d_model = d_model
-        self.num_heads = num_heads
-        
-        self.embedding_0 = nn.Embedding(vocab_size, d_model)
-        self.pos_encoder = PositionalEncoding(d_model, dropout, max_seq_len)
-        self.attention_1 = nn.MultiheadAttention(d_model, num_heads, dropout=0.1, batch_first=True)
-        self.norm_1_1 = nn.LayerNorm(d_model)
-        self.ffn_2 = nn.Sequential(
-            nn.Linear(d_model, 2048),
-            nn.ReLU(),
-            nn.Dropout(0.1),
-            nn.Linear(2048, d_model),
-        )
-        self.norm_2_2 = nn.LayerNorm(d_model)
-        
-    def forward(self, x):
-        batch_size, seq_len = x.shape
-        
-        x = self.embedding_0(x)
-        x = self.pos_encoder(x)
-        attn_output, _ = self.attention_1(x, x, x)
-        x = self.norm_1_1(x + attn_output)
-        ffn_output = self.ffn_2(x)
-        x = self.norm_2_2(x + ffn_output)
-        
-        return x
-```
+- [ ] Add attention weight visualization heatmaps
+- [ ] Implement forward pass simulation with real tensors
+- [ ] Add model export to ONNX format
+- [ ] Include step-by-step animation of data flow
+- [ ] Add collaboration features (multi-user editing)
+- [ ] Integrate with Hugging Face models
 
-## 🛠️ Tech Stack
+---
 
-- **Frontend Framework**: React 18 with TypeScript
-- **Build Tool**: Vite
-- **Graph Library**: React Flow (drag-and-drop graph editor)
-- **State Management**: Zustand
-- **Code Editor**: Monaco Editor (VS Code's editor)
-- **Styling**: Inline styles with CSS variables
-
-## 🎯 Learning Objectives
-
-This tool helps students understand:
-
-1. **Data Flow**: How tensors transform through each layer
-2. **Architecture Design**: Valid transformer and neural network structures
-3. **Mathematical Foundations**: Formulas displayed for each operation
-4. **Implementation**: Real PyTorch code that can be used in projects
-5. **Hyperparameters**: Impact of different configuration choices
-
-## 📄 License
-
-MIT License - Feel free to use this for educational purposes!
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
+**Built with ❤️ for AI Education**
