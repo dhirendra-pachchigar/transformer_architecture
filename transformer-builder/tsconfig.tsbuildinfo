@@ -1,0 +1,1 @@
+{"root":["./src/App.tsx","./src/main.tsx","./src/components/CodePanel.tsx","./src/components/CustomNode.tsx","./src/components/NodeConfigPanel.tsx","./src/components/Sidebar.tsx","./src/store/useStore.ts","./src/types/index.ts","./src/utils/codeGenerator.ts"],"version":"5.9.3"}
