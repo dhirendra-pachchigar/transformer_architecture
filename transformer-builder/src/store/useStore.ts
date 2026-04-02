@@ -13,8 +13,9 @@ interface ArchitectureState {
   addNode: (type: NodeType, position: { x: number; y: number }) => void;
   updateNode: (id: string, data: Partial<Node['data']>) => void;
   removeNode: (id: string) => void;
-  setNodes: (nodes: Node[]) => void;
-  setEdges: (edges: Edge[]) => void;
+  deleteNode: (id: string) => void;
+  setNodes: (nodes: Node[] | ((nds: Node[]) => Node[])) => void;
+  setEdges: (edges: Edge[] | ((eds: Edge[]) => Edge[])) => void;
   setSelectedNode: (id: string | null) => void;
   toggleCode: () => void;
   setMode: (mode: 'transformer' | 'neural' | 'hybrid') => void;
@@ -135,8 +136,30 @@ export const useStore = create<ArchitectureState>((set, get) => ({
     }));
   },
   
-  setNodes: (nodes) => set({ nodes }),
-  setEdges: (edges) => set({ edges }),
+  deleteNode: (id) => {
+    set((state) => ({
+      nodes: state.nodes.filter((node) => node.id !== id),
+      edges: state.edges.filter(
+        (edge) => edge.source !== id && edge.target !== id
+      ),
+      selectedNode: null,
+    }));
+  },
+  
+  setNodes: (nodesOrFn) => {
+    if (typeof nodesOrFn === 'function') {
+      set((state) => ({ nodes: nodesOrFn(state.nodes) }));
+    } else {
+      set({ nodes: nodesOrFn });
+    }
+  },
+  setEdges: (edgesOrFn) => {
+    if (typeof edgesOrFn === 'function') {
+      set((state) => ({ edges: edgesOrFn(state.edges) }));
+    } else {
+      set({ edges: edgesOrFn });
+    }
+  },
   setSelectedNode: (id) => set({ selectedNode: id }),
   toggleCode: () => set((state) => ({ showCode: !state.showCode })),
   setMode: (mode) => set({ mode }),
